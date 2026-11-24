@@ -71,23 +71,6 @@
   </div>
 </section>
 
-<!-- Franja declarativa -->
-<div class="franja-declarativa" aria-hidden="true">
-  <div class="franja-declarativa-inner">
-    <span>100% Arábica colombiano</span>
-    <span class="franja-sep">·</span>
-    <span>Tostado fresco</span>
-    <span class="franja-sep">·</span>
-    <span>38 variedades</span>
-    <span class="franja-sep">·</span>
-    <span>Molido o en grano</span>
-    <span class="franja-sep">·</span>
-    <span>Envío a toda Colombia</span>
-    <span class="franja-sep">·</span>
-    <span>Pago seguro</span>
-  </div>
-</div>
-
 <!-- Café con origen -->
 <section class="seccion seccion-destacada">
   <div class="container">
@@ -161,30 +144,6 @@
     <a href="tienda.html" class="btn btn-primary btn-lg">Explorar el catálogo</a>
   </div>
 </div>
-
-<!-- Así de fácil es pedir -->
-<section class="seccion">
-  <div class="container">
-    <h2 style="max-width:18ch;margin-bottom:3rem;">¿Cómo pedir tu café?</h2>
-    <div class="pasos">
-      <div class="paso">
-        <span class="paso-num">01</span>
-        <h4>Elige tu café</h4>
-        <p>Navega el catálogo, filtra por categoría o busca el sabor que quieres. 38 opciones esperando.</p>
-      </div>
-      <div class="paso">
-        <span class="paso-num">02</span>
-        <h4>Agrega al carrito</h4>
-        <p>Escoge la presentación —250 g o 500 g— y el tueste. Puedes combinar varios cafés en un mismo pedido.</p>
-      </div>
-      <div class="paso">
-        <span class="paso-num">03</span>
-        <h4>Finaliza el pedido</h4>
-        <p>Checkout en minutos. Confirmamos el pedido y coordinamos el envío a tu puerta.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Sección empezar pedido -->
 <section class="seccion-empezar">
@@ -276,7 +235,7 @@
 <script>
   /* Llenar grid de origen */
   document.addEventListener('DOMContentLoaded', () => {
-    const origenProds = porCategoria('origen');
+    const origenProds = porCategoria('origen').slice(0, 6);
     const grid = document.getElementById('gridOrigen');
     if (!grid) return;
     grid.innerHTML = origenProds.map(p => `
