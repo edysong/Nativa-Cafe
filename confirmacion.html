@@ -1,23 +1,23 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedido confirmado â€” CafÃ© Nativo</title>
-  <meta name="description" content="Tu pedido en CafÃ© Nativo ha sido confirmado.">
+  <title>Pedido confirmado — Café Nativo</title>
+  <meta name="description" content="Tu pedido en Café Nativo ha sido confirmado.">
   <link rel="stylesheet" href="css/styles.css">
   <script>tailwind.config={corePlugins:{preflight:false}}</script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
-<div class="topbar">Pedidos por WhatsApp &nbsp;Â·&nbsp; Bolsas de 250 g y 500 g</div>
+<div class="topbar">Pedidos por WhatsApp &nbsp;·&nbsp; Bolsas de 250 g y 500 g</div>
 
 <header class="site-header">
   <div class="container header-inner">
     <a href="index.html" class="header-logo">
       <span>NATIVO</span>
-      <span class="logo-sub">EL ORIGEN DE TU CAFÃ‰</span>
+      <span class="logo-sub">EL ORIGEN DE TU CAFÉ</span>
     </a>
   </div>
 </header>
@@ -31,8 +31,8 @@
       </svg>
     </div>
 
-    <h1 style="font-size:clamp(1.5rem,3vw,2.2rem);text-align:center;">Â¡Pedido confirmado!</h1>
-    <p style="text-align:center;margin:.5rem auto 0;">Gracias por tu compra. RecibirÃ¡s un resumen en tu correo.</p>
+    <h1 style="font-size:clamp(1.5rem,3vw,2.2rem);text-align:center;">¡Pedido confirmado!</h1>
+    <p style="text-align:center;margin:.5rem auto 0;">Gracias por tu compra. Recibirás un resumen en tu correo.</p>
 
     <div style="text-align:center;">
       <div class="numero-pedido" id="numeroPedido" aria-live="polite">NAT-XXXXXXXX-XXXX</div>
@@ -57,8 +57,8 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-bottom" style="border-top:none;padding-top:0;">
-      <span>Â© 2024 CafÃ© Nativo</span>
-      <span>Proyecto acadÃ©mico â€” sin cobros reales</span>
+      <span>© 2024 Café Nativo</span>
+      <span>Proyecto académico — sin cobros reales</span>
     </div>
   </div>
 </footer>
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pedido = JSON.parse(localStorage.getItem('nativo_ultimo_pedido') || 'null');
 
   if (!pedido) {
-    document.getElementById('confirmacionGrid').innerHTML = '<p style="text-align:center;color:var(--texto-suave);">No se encontrÃ³ informaciÃ³n del pedido.</p>';
+    document.getElementById('confirmacionGrid').innerHTML = '<p style="text-align:center;color:var(--texto-suave);">No se encontró información del pedido.</p>';
     return;
   }
 
@@ -84,15 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('confirmacionGrid').innerHTML = `
     <div class="confirmacion-bloque">
-      <h4>DATOS DE ENVÃO</h4>
-      <p><strong>${env.nombre || 'â€”'}</strong><br>
+      <h4>DATOS DE ENVÍO</h4>
+      <p><strong>${env.nombre || '—'}</strong><br>
       ${env.direccion || ''}, ${env.barrio || ''}<br>
       ${env.ciudad || ''}, ${env.departamento || ''}<br>
       ${env.celular || ''}</p>
     </div>
     <div class="confirmacion-bloque">
-      <h4>MÃ‰TODO DE PAGO</h4>
-      <p>${pedido.pago || 'â€”'}</p>
+      <h4>MÉTODO DE PAGO</h4>
+      <p>${pedido.pago || '—'}</p>
       <p style="margin-top:.5rem;">Fecha: ${fecha}</p>
       <p style="margin-top:.5rem;font-weight:600;color:var(--cafe);">Total: ${formatPrecio(pedido.total)}</p>
     </div>`;
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <h4 style="font-size:.78rem;letter-spacing:.1em;color:var(--dorado);margin-bottom:1rem;">PRODUCTOS</h4>
       ${pedido.items.map(it => `
         <div style="display:flex;justify-content:space-between;font-size:.88rem;padding:.35rem 0;border-bottom:1px solid var(--borde);">
-          <span>${it.nombre} (${it.size}, ${it.tueste}) Ã—${it.cantidad}</span>
+          <span>${it.nombre} (${it.size}, ${it.tueste}) ×${it.cantidad}</span>
           <span style="font-weight:600;">${formatPrecio(it.precio * it.cantidad)}</span>
         </div>`).join('')}
       <div style="display:flex;justify-content:space-between;font-size:1rem;font-weight:700;color:var(--verde);margin-top:.75rem;">

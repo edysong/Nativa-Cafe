@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="pageTitle">Producto â€” CafÃ© Nativo</title>
-  <meta name="description" id="pageDesc" content="CafÃ© colombiano de especialidad.">
-  <meta property="og:title" id="ogTitle" content="Producto â€” CafÃ© Nativo">
+  <title id="pageTitle">Producto — Café Nativo</title>
+  <meta name="description" id="pageDesc" content="Café colombiano de especialidad.">
+  <meta property="og:title" id="ogTitle" content="Producto — Café Nativo">
   <meta property="og:type" content="product">
   <link rel="stylesheet" href="css/styles.css">
   <script>tailwind.config={corePlugins:{preflight:false}}</script>
@@ -13,18 +13,18 @@
 </head>
 <body>
 
-<div class="topbar">Pedidos por WhatsApp &nbsp;Â·&nbsp; Bolsas de 250 g y 500 g</div>
+<div class="topbar">Pedidos por WhatsApp &nbsp;·&nbsp; Bolsas de 250 g y 500 g</div>
 
 <header class="site-header">
   <div class="container header-inner">
-    <nav class="header-nav" aria-label="NavegaciÃ³n principal">
+    <nav class="header-nav" aria-label="Navegación principal">
       <a href="tienda.html">Tienda</a>
       <a href="tienda.html?cat=origen">De origen</a>
       <a href="tienda.html?cat=saborizados">Saborizados</a>
     </nav>
-    <a href="index.html" class="header-logo" aria-label="CafÃ© Nativo inicio">
+    <a href="index.html" class="header-logo" aria-label="Café Nativo inicio">
       <span>NATIVO</span>
-      <span class="logo-sub">EL ORIGEN DE TU CAFÃ‰</span>
+      <span class="logo-sub">EL ORIGEN DE TU CAFÉ</span>
     </a>
     <div class="header-actions">
       <button aria-label="Buscar" onclick="window.location='tienda.html'">
@@ -44,7 +44,7 @@
 
 <main>
   <div class="container">
-    <nav class="migas" aria-label="Ruta de navegaciÃ³n" id="migas">
+    <nav class="migas" aria-label="Ruta de navegación" id="migas">
       <a href="index.html">Inicio</a>
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M9 5l7 7-7 7"/></svg>
       <a href="tienda.html" id="migaCat">Tienda</a>
@@ -56,12 +56,12 @@
       <!-- Se llena con JS -->
     </div>
 
-    <!-- AcordeÃ³n -->
+    <!-- Acordeón -->
     <div class="acordeon" id="acordeon" style="margin:2.5rem 0;max-width:600px;"></div>
 
     <!-- Relacionados -->
     <section style="padding:2rem 0 3rem;" id="secRelacionados">
-      <h3 style="margin-bottom:1.5rem;">TambiÃ©n te puede gustar</h3>
+      <h3 style="margin-bottom:1.5rem;">También te puede gustar</h3>
       <div class="grid-productos" id="gridRelacionados" role="list"></div>
     </section>
   </div>
@@ -72,12 +72,12 @@
     <div class="footer-grid">
       <div class="footer-marca">
         <div class="logo-footer">NATIVO</div>
-        <p>El origen de tu cafÃ©.</p>
+        <p>El origen de tu café.</p>
       </div>
       <div class="footer-col">
-        <h5>CategorÃ­as</h5>
+        <h5>Categorías</h5>
         <ul>
-          <li><a href="tienda.html?cat=clasicos">ClÃ¡sicos</a></li>
+          <li><a href="tienda.html?cat=clasicos">Clásicos</a></li>
           <li><a href="tienda.html?cat=origen">De origen</a></li>
           <li><a href="tienda.html?cat=saborizados">Saborizados</a></li>
         </ul>
@@ -94,8 +94,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>Â© 2024 CafÃ© Nativo</span>
-      <span>Proyecto acadÃ©mico</span>
+      <span>© 2024 Café Nativo</span>
+      <span>Proyecto académico</span>
     </div>
   </div>
 </footer>
@@ -114,7 +114,7 @@
   <div class="carrito-items" id="carritoItems"></div>
   <div class="carrito-pie" id="carritoPie" style="display:none">
     <div class="carrito-cupon">
-      <input type="text" id="inputCupon" placeholder="CÃ³digo de descuento" aria-label="CÃ³digo de cupÃ³n" autocomplete="off">
+      <input type="text" id="inputCupon" placeholder="Código de descuento" aria-label="Código de cupón" autocomplete="off">
       <button class="btn btn-outline btn-sm" id="btnAplicarCupon">Aplicar</button>
     </div>
     <div id="cuponMsg" class="cupon-msg" aria-live="polite"></div>
@@ -139,9 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Meta
-  document.getElementById('pageTitle').textContent  = `${prod.nombre} â€” CafÃ© Nativo`;
+  document.getElementById('pageTitle').textContent  = `${prod.nombre} — Café Nativo`;
   document.getElementById('pageDesc').content        = prod.descripcion;
-  document.getElementById('ogTitle').content         = `${prod.nombre} â€” CafÃ© Nativo`;
+  document.getElementById('ogTitle').content         = `${prod.nombre} — Café Nativo`;
   document.getElementById('migaCat').textContent     = CATEGORIAS[prod.categoria].label;
   document.getElementById('migaCat').href            = `tienda.html?cat=${prod.categoria}`;
   document.getElementById('migaNombre').textContent  = prod.nombre;
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ${sizes.length > 1 ? `
         <div class="opciones-grupo">
-          <div class="opciones-label">PresentaciÃ³n</div>
+          <div class="opciones-label">Presentación</div>
           <div class="opciones-btns" id="sizeBtns">${sizesBtns}</div>
         </div>` : ''}
 
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="opciones-grupo">
           <div class="opciones-label">Cantidad</div>
           <div class="cantidad-ctrl">
-            <button class="qty-btn" id="btnMenos" aria-label="Reducir cantidad">âˆ’</button>
+            <button class="qty-btn" id="btnMenos" aria-label="Reducir cantidad">−</button>
             <span class="qty-num" id="cantidadNum">${cantidad}</span>
             <button class="qty-btn" id="btnMas" aria-label="Aumentar cantidad">+</button>
           </div>
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('btnWaProd')?.addEventListener('click', () => {
       const msg = encodeURIComponent(
-        `Hola! Quiero pedir:\n\nâ€¢ ${prod.nombre} (${selSize}, ${selTueste}) x${cantidad} = ${formatPrecio(precioActual() * cantidad)}`
+        `Hola! Quiero pedir:\n\n• ${prod.nombre} (${selSize}, ${selTueste}) x${cantidad} = ${formatPrecio(precioActual() * cantidad)}`
       );
       window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank');
     });
@@ -267,11 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   render();
 
-  // AcordeÃ³n
+  // Acordeón
   const items = [
-    { titulo: 'Detalles del producto', cuerpo: `<p>${prod.descripcion}</p><p style="margin-top:.75rem;">PresentaciÃ³n: <strong>${prod.presentaciones.map(p=>p.size).join(' Â· ')}</strong><br>Tueste: <strong>${[...new Set(prod.presentaciones.map(p=>p.tueste))].join(' Â· ')}</strong></p>` },
-    { titulo: 'CÃ³mo prepararlo', cuerpo: '<p>Para cafetera de filtro, usa 10â€“12 g por cada 180 ml de agua a 92â€“96Â°C. Para prensa francesa, 15 g por 240 ml. Muele justo antes de preparar para conservar los aromas.</p>' },
-    { titulo: 'EnvÃ­o y polÃ­tica de devoluciÃ³n', cuerpo: '<p>EnvÃ­os a toda Colombia. Tiempo estimado: 2â€“5 dÃ­as hÃ¡biles. EnvÃ­o gratis en pedidos superiores a $100.000. Para devoluciones, escrÃ­benos dentro de los 7 dÃ­as posteriores a la entrega.</p>' },
+    { titulo: 'Detalles del producto', cuerpo: `<p>${prod.descripcion}</p><p style="margin-top:.75rem;">Presentación: <strong>${prod.presentaciones.map(p=>p.size).join(' · ')}</strong><br>Tueste: <strong>${[...new Set(prod.presentaciones.map(p=>p.tueste))].join(' · ')}</strong></p>` },
+    { titulo: 'Cómo prepararlo', cuerpo: '<p>Para cafetera de filtro, usa 10–12 g por cada 180 ml de agua a 92–96°C. Para prensa francesa, 15 g por 240 ml. Muele justo antes de preparar para conservar los aromas.</p>' },
+    { titulo: 'Envío y política de devolución', cuerpo: '<p>Envíos a toda Colombia. Tiempo estimado: 2–5 días hábiles. Envío gratis en pedidos superiores a $100.000. Para devoluciones, escríbenos dentro de los 7 días posteriores a la entrega.</p>' },
   ];
 
   document.getElementById('acordeon').innerHTML = items.map((it, i) => `
@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="card-precio">${formatPrecio(precioDesde(p))}</div>
         </div>
         <div class="card-acciones">
-          <a href="producto.html?id=${p.id}" class="btn btn-outline btn-sm">Ver mÃ¡s</a>
+          <a href="producto.html?id=${p.id}" class="btn btn-outline btn-sm">Ver más</a>
           <button class="btn btn-primary btn-sm" onclick="agregarAlCarrito('${p.id}','${p.presentaciones[0].size}','${p.presentaciones[0].tueste}',1)">Agregar</button>
         </div>
       </article>`).join('');
