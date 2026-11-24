@@ -842,6 +842,99 @@ p  { color: var(--texto-suave); max-width: 65ch; line-height: 1.65; }
 .paso h4 { font-size: 1.05rem; color: var(--verde); margin-top: .15rem; }
 .paso p { font-size: .85rem; max-width: none; }
 
+/* ─── Franja declarativa (index) ─── */
+.franja-declarativa {
+  background: var(--verde);
+  padding: .75rem 0;
+  overflow: hidden;
+}
+.franja-declarativa-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .5rem 1.25rem;
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(243,234,217,.8);
+}
+.franja-sep { color: var(--dorado); opacity: .6; }
+
+/* ─── Franja CTA (index) ─── */
+.franja-cta {
+  background: var(--cafe);
+  padding: 3.5rem 0;
+}
+.franja-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.franja-cta-label {
+  font-size: .78rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dorado);
+  margin-bottom: .5rem;
+}
+.franja-cta-titulo {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--crema);
+  margin: 0;
+  letter-spacing: -.01em;
+}
+@media (max-width: 639px) {
+  .franja-cta-inner { flex-direction: column; align-items: flex-start; }
+}
+
+/* ─── Sección empezar pedido (index) ─── */
+.seccion-empezar {
+  background: var(--verde);
+  padding: 5rem 0;
+}
+.empezar-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .empezar-inner { grid-template-columns: 1fr 1fr; }
+}
+.empezar-titulo {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  color: var(--crema);
+  margin: .5rem 0 1rem;
+  letter-spacing: -.015em;
+}
+.empezar-desc {
+  font-size: .95rem;
+  color: rgba(243,234,217,.75);
+  max-width: 42ch;
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+.empezar-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+.empezar-imagen {
+  border-radius: var(--radio);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.empezar-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* ─── Formulario pedido rápido (index) ─── */
 .form-rapido {
   background: var(--verde);

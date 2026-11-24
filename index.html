@@ -16,7 +16,7 @@
 
 <!-- Barra superior -->
 <div class="topbar">
-  Pedidos por WhatsApp &nbsp;·&nbsp; Bolsas de 250 g y 500 g
+  Envíos a toda Colombia &nbsp;·&nbsp; Café colombiano 100% arábica &nbsp;·&nbsp; 38 variedades
 </div>
 
 <!-- Header -->
@@ -71,34 +71,20 @@
   </div>
 </section>
 
-<!-- Franjas de propuesta de valor -->
-<div class="franjas" role="list">
-  <div class="franja-item" role="listitem">
-    <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253"/>
-    </svg>
-    <div class="franja-txt">
-      <strong>Café 100% colombiano</strong>
-      <span>Arábica de origen único</span>
-    </div>
-  </div>
-  <div class="franja-item" role="listitem">
-    <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/>
-    </svg>
-    <div class="franja-txt">
-      <strong>Molido o en grano</strong>
-      <span>250 g y 500 g siempre frescos</span>
-    </div>
-  </div>
-  <div class="franja-item" role="listitem">
-    <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
-    </svg>
-    <div class="franja-txt">
-      <strong>Pides por WhatsApp</strong>
-      <span>Respuesta rápida, envío a casa</span>
-    </div>
+<!-- Franja declarativa -->
+<div class="franja-declarativa" aria-hidden="true">
+  <div class="franja-declarativa-inner">
+    <span>100% Arábica colombiano</span>
+    <span class="franja-sep">·</span>
+    <span>Tostado fresco</span>
+    <span class="franja-sep">·</span>
+    <span>38 variedades</span>
+    <span class="franja-sep">·</span>
+    <span>Molido o en grano</span>
+    <span class="franja-sep">·</span>
+    <span>Envío a toda Colombia</span>
+    <span class="franja-sep">·</span>
+    <span>Pago seguro</span>
   </div>
 </div>
 
@@ -165,17 +151,14 @@
   </div>
 </section>
 
-<!-- Franja WhatsApp -->
-<div class="franja-wa">
-  <div class="container">
-    <h2>Lo nuevo, primero por WhatsApp</h2>
-    <p>Ediciones limitadas, lotes especiales y descuentos exclusivos para nuestros contactos de WhatsApp. Escríbenos y te agregamos.</p>
-    <a href="https://wa.me/573000000000" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      Escribir por WhatsApp
-    </a>
+<!-- Franja CTA catálogo -->
+<div class="franja-cta">
+  <div class="container franja-cta-inner">
+    <div>
+      <p class="franja-cta-label">Más de 38 variedades</p>
+      <h2 class="franja-cta-titulo">Encuentra tu café ideal</h2>
+    </div>
+    <a href="tienda.html" class="btn btn-primary btn-lg">Explorar el catálogo</a>
   </div>
 </div>
 
@@ -197,68 +180,27 @@
       <div class="paso">
         <span class="paso-num">03</span>
         <h4>Finaliza el pedido</h4>
-        <p>Checkout rápido o por WhatsApp. Confirmamos y coordinamos el envío a tu puerta.</p>
+        <p>Checkout en minutos. Confirmamos el pedido y coordinamos el envío a tu puerta.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Formulario pedido rápido -->
-<section class="seccion seccion-destacada">
-  <div class="container">
-    <form class="form-rapido" id="formRapido" novalidate>
-      <h3>Pedido rápido</h3>
-      <div class="form-grid">
-        <div class="campo">
-          <label for="fr-cafe">Café</label>
-          <select name="cafe" id="fr-cafe" required>
-            <option value="">Selecciona un café</option>
-          </select>
-          <span class="campo-error">Selecciona un café</span>
-        </div>
-        <div class="campo">
-          <label for="fr-pres">Presentación</label>
-          <select name="presentacion" id="fr-pres" required>
-            <option value="">—</option>
-          </select>
-          <span class="campo-error">Selecciona la presentación</span>
-        </div>
-        <div class="campo">
-          <label for="fr-tueste">Tueste</label>
-          <select name="tueste" id="fr-tueste" required>
-            <option value="">—</option>
-          </select>
-        </div>
-        <div class="campo">
-          <label for="fr-qty">Cantidad</label>
-          <select name="cantidad" id="fr-qty">
-            <option value="1">1 bolsa</option>
-            <option value="2">2 bolsas</option>
-            <option value="3">3 bolsas</option>
-            <option value="5">5 bolsas</option>
-          </select>
-        </div>
-        <div class="campo">
-          <label for="fr-nombre">Nombre</label>
-          <input type="text" name="nombre" id="fr-nombre" placeholder="Tu nombre" required autocomplete="name">
-          <span class="campo-error">Ingresa tu nombre</span>
-        </div>
-        <div class="campo">
-          <label for="fr-ciudad">Ciudad</label>
-          <input type="text" name="ciudad" id="fr-ciudad" placeholder="Ciudad de envío" required autocomplete="address-level2">
-          <span class="campo-error">Ingresa tu ciudad</span>
-        </div>
+<!-- Sección empezar pedido -->
+<section class="seccion-empezar">
+  <div class="container empezar-inner">
+    <div class="empezar-texto">
+      <span class="seccion-eyebrow">Tu café, a tu puerta</span>
+      <h2 class="empezar-titulo">Del origen a tu mesa</h2>
+      <p class="empezar-desc">Elige tu variedad, selecciona el molido y el tueste que prefieres. Pagos seguros, envío a toda Colombia.</p>
+      <div class="empezar-acciones">
+        <a href="tienda.html" class="btn btn-primary btn-lg">Ir a la tienda</a>
+        <a href="tienda.html?cat=origen" class="btn btn-ghost-cream btn-lg">Cafés de origen</a>
       </div>
-      <div class="form-total">
-        <div>
-          <span style="font-size:.82rem;color:rgba(243,234,217,.65);">Total estimado</span>
-          <div class="form-total-valor" id="formTotal">$0</div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg">
-          Pedir por WhatsApp
-        </button>
-      </div>
-    </form>
+    </div>
+    <div class="empezar-imagen">
+      <img src="img/03-nativo-cafe-molido-500g-medio.jpg" alt="Café Nativo molido 500g — tostado medio" loading="lazy">
+    </div>
   </div>
 </section>
 
