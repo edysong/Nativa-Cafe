@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Producto — Café Nativo</title>
+  <meta name="description" id="pageDesc" content="Café colombiano de especialidad.">
+  <meta property="og:title" id="ogTitle" content="Producto — Café Nativo">
+  <meta property="og:type" content="product">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="topbar">Pedidos por WhatsApp &nbsp;·&nbsp; Bolsas de 250 g y 500 g</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <nav class="header-nav" aria-label="Navegación principal">
+      <a href="tienda.html">Tienda</a>
+      <a href="tienda.html?cat=origen">De origen</a>
+      <a href="tienda.html?cat=saborizados">Saborizados</a>
+    </nav>
+    <a href="index.html" class="header-logo" aria-label="Café Nativo inicio">
+      <span>NATIVO</span>
+      <span class="logo-sub">EL ORIGEN DE TU CAFÉ</span>
+    </a>
+    <div class="header-actions">
+      <button aria-label="Buscar" onclick="window.location='tienda.html'">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/>
+        </svg>
+      </button>
+      <button data-carrito-abrir aria-label="Abrir carrito">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.853-7.148A60.114 60.114 0 006.412 5.635M4.5 20.25a.75.75 0 110 1.5.75.75 0 010-1.5zm15.75 0a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
+        </svg>
+        <span class="carrito-badge" style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <nav class="migas" aria-label="Ruta de navegación" id="migas">
+      <a href="index.html">Inicio</a>
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M9 5l7 7-7 7"/></svg>
+      <a href="tienda.html" id="migaCat">Tienda</a>
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M9 5l7 7-7 7"/></svg>
+      <span id="migaNombre">Producto</span>
+    </nav>
+
+    <div class="producto-layout" id="productoLayout">
+      <!-- Se llena con JS -->
+    </div>
+
+    <!-- Acordeón -->
+    <div class="acordeon" id="acordeon" style="margin:2.5rem 0;max-width:600px;"></div>
+
+    <!-- Relacionados -->
+    <section style="padding:2rem 0 3rem;" id="secRelacionados">
+      <h3 style="margin-bottom:1.5rem;">También te puede gustar</h3>
+      <div class="grid-productos" id="gridRelacionados" role="list"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-marca">
+        <div class="logo-footer">NATIVO</div>
+        <p>El origen de tu café.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Categorías</h5>
+        <ul>
+          <li><a href="tienda.html?cat=clasicos">Clásicos</a></li>
+          <li><a href="tienda.html?cat=origen">De origen</a></li>
+          <li><a href="tienda.html?cat=saborizados">Saborizados</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Ayuda</h5>
+        <ul><li><a href="mis-pedidos.html">Mis pedidos</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://wa.me/573000000000" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Café Nativo</span>
+      <span>Proyecto académico</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Panel carrito -->
+<div class="carrito-overlay" id="carritoOverlay" aria-hidden="true"></div>
+<aside class="carrito-panel" id="carritoPanel" aria-label="Carrito de compras">
+  <div class="carrito-cabecera">
+    <h2>Tu carrito</h2>
+    <button class="carrito-cerrar" id="carritoCerrar" aria-label="Cerrar carrito">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="carrito-items" id="carritoItems"></div>
+  <div class="carrito-pie" id="carritoPie" style="display:none">
+    <div class="carrito-cupon">
+      <input type="text" id="inputCupon" placeholder="Código de descuento" aria-label="Código de cupón" autocomplete="off">
+      <button class="btn btn-outline btn-sm" id="btnAplicarCupon">Aplicar</button>
+    </div>
+    <div id="cuponMsg" class="cupon-msg" aria-live="polite"></div>
+    <div class="carrito-resumen"></div>
+    <a href="carrito.html" class="btn btn-outline btn-block">Ver carrito</a>
+    <a href="checkout.html" class="btn btn-primary btn-block">Finalizar compra</a>
+  </div>
+</aside>
+
+<script src="js/productos.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params  = new URLSearchParams(location.search);
+  const id      = params.get('id');
+  const prod    = getProducto(id);
+
+  if (!prod) {
+    document.getElementById('productoLayout').innerHTML =
+      '<p style="padding:3rem 0;color:var(--texto-suave);">Producto no encontrado. <a href="tienda.html">Ver tienda</a></p>';
+    return;
+  }
+
+  // Meta
+  document.getElementById('pageTitle').textContent  = `${prod.nombre} — Café Nativo`;
+  document.getElementById('pageDesc').content        = prod.descripcion;
+  document.getElementById('ogTitle').content         = `${prod.nombre} — Café Nativo`;
+  document.getElementById('migaCat').textContent     = CATEGORIAS[prod.categoria].label;
+  document.getElementById('migaCat').href            = `tienda.html?cat=${prod.categoria}`;
+  document.getElementById('migaNombre').textContent  = prod.nombre;
+
+  // Estado seleccionado
+  const sizes   = [...new Set(prod.presentaciones.map(p => p.size))];
+  const tuestes = [...new Set(prod.presentaciones.map(p => p.tueste))];
+  let selSize   = sizes[0];
+  let selTueste = tuestes[0];
+  let cantidad  = 1;
+
+  function precioActual() {
+    return prod.presentaciones.find(p => p.size === selSize && p.tueste === selTueste)?.precio
+      || prod.presentaciones[0].precio;
+  }
+
+  function imgActual() {
+    const pres = prod.presentaciones.find(p => p.size === selSize && p.tueste === selTueste);
+    return pres?.img || prod.img;
+  }
+
+  function render() {
+    const imgSrc = imgActual();
+    const imgHtml = imgSrc
+      ? `<img src="${imgSrc}" alt="${prod.nombre} ${selSize}" id="productoImgPrincipal" style="width:100%;height:100%;object-fit:cover;">`
+      : `<div class="bolsa-css" data-color="${prod.bolsa||'verde'}" style="height:100%;"><span class="bolsa-nativo">NATIVO</span><span class="bolsa-nombre" style="font-size:1rem;">${prod.nombre}</span><span class="bolsa-peso">${selSize}</span></div>`;
+
+    const sizesBtns = sizes.map(s =>
+      `<button class="opcion-btn ${s===selSize?'activo':''}" data-size="${s}">${s}</button>`
+    ).join('');
+
+    const tuestesBtns = tuestes.map(t =>
+      `<button class="opcion-btn ${t===selTueste?'activo':''}" data-tueste="${t}">${t}</button>`
+    ).join('');
+
+    document.getElementById('productoLayout').innerHTML = `
+      <div class="producto-galeria">
+        <div class="producto-img-grande">${imgHtml}</div>
+      </div>
+      <div class="producto-info">
+        <div class="producto-cat">${CATEGORIAS[prod.categoria].label}</div>
+        <h1 class="producto-nombre">${prod.nombre}</h1>
+        <div class="producto-precio-grande" id="precioGrande">${formatPrecio(precioActual())}</div>
+        <p>${prod.descripcion}</p>
+
+        ${sizes.length > 1 ? `
+        <div class="opciones-grupo">
+          <div class="opciones-label">Presentación</div>
+          <div class="opciones-btns" id="sizeBtns">${sizesBtns}</div>
+        </div>` : ''}
+
+        ${tuestes.length > 1 ? `
+        <div class="opciones-grupo">
+          <div class="opciones-label">Tueste</div>
+          <div class="opciones-btns" id="tuesteBtns">${tuestesBtns}</div>
+        </div>` : ''}
+
+        <div class="opciones-grupo">
+          <div class="opciones-label">Cantidad</div>
+          <div class="cantidad-ctrl">
+            <button class="qty-btn" id="btnMenos" aria-label="Reducir cantidad">−</button>
+            <span class="qty-num" id="cantidadNum">${cantidad}</span>
+            <button class="qty-btn" id="btnMas" aria-label="Aumentar cantidad">+</button>
+          </div>
+        </div>
+
+        <div class="producto-acciones">
+          <button class="btn btn-primary btn-lg" id="btnAgregar">Agregar al carrito</button>
+          <button class="btn btn-verde btn-lg" id="btnWaProd">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Pedir ahora
+          </button>
+        </div>
+      </div>`;
+
+    // Eventos
+    document.getElementById('btnMenos')?.addEventListener('click', () => {
+      cantidad = Math.max(1, cantidad - 1);
+      document.getElementById('cantidadNum').textContent = cantidad;
+    });
+    document.getElementById('btnMas')?.addEventListener('click', () => {
+      cantidad++;
+      document.getElementById('cantidadNum').textContent = cantidad;
+    });
+
+    function actualizarImagen() {
+      const src = imgActual();
+      const imgEl = document.getElementById('productoImgPrincipal');
+      if (imgEl && src) imgEl.src = src;
+    }
+
+    document.getElementById('sizeBtns')?.addEventListener('click', e => {
+      const btn = e.target.closest('[data-size]');
+      if (!btn) return;
+      selSize = btn.dataset.size;
+      document.querySelectorAll('[data-size]').forEach(b => b.classList.toggle('activo', b.dataset.size === selSize));
+      document.getElementById('precioGrande').textContent = formatPrecio(precioActual());
+      actualizarImagen();
+    });
+
+    document.getElementById('tuesteBtns')?.addEventListener('click', e => {
+      const btn = e.target.closest('[data-tueste]');
+      if (!btn) return;
+      selTueste = btn.dataset.tueste;
+      document.querySelectorAll('[data-tueste]').forEach(b => b.classList.toggle('activo', b.dataset.tueste === selTueste));
+      document.getElementById('precioGrande').textContent = formatPrecio(precioActual());
+      actualizarImagen();
+    });
+
+    document.getElementById('btnAgregar')?.addEventListener('click', () => {
+      agregarAlCarrito(prod.id, selSize, selTueste, cantidad);
+    });
+
+    document.getElementById('btnWaProd')?.addEventListener('click', () => {
+      const msg = encodeURIComponent(
+        `Hola! Quiero pedir:\n\n• ${prod.nombre} (${selSize}, ${selTueste}) x${cantidad} = ${formatPrecio(precioActual() * cantidad)}`
+      );
+      window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank');
+    });
+  }
+
+  render();
+
+  // Acordeón
+  const items = [
+    { titulo: 'Detalles del producto', cuerpo: `<p>${prod.descripcion}</p><p style="margin-top:.75rem;">Presentación: <strong>${prod.presentaciones.map(p=>p.size).join(' · ')}</strong><br>Tueste: <strong>${[...new Set(prod.presentaciones.map(p=>p.tueste))].join(' · ')}</strong></p>` },
+    { titulo: 'Cómo prepararlo', cuerpo: '<p>Para cafetera de filtro, usa 10–12 g por cada 180 ml de agua a 92–96°C. Para prensa francesa, 15 g por 240 ml. Muele justo antes de preparar para conservar los aromas.</p>' },
+    { titulo: 'Envío y política de devolución', cuerpo: '<p>Envíos a toda Colombia. Tiempo estimado: 2–5 días hábiles. Envío gratis en pedidos superiores a $100.000. Para devoluciones, escríbenos dentro de los 7 días posteriores a la entrega.</p>' },
+  ];
+
+  document.getElementById('acordeon').innerHTML = items.map((it, i) => `
+    <div class="acordeon-item ${i===0?'abierto':''}">
+      <button class="acordeon-btn" aria-expanded="${i===0}" aria-controls="ac-cuerpo-${i}">
+        ${it.titulo}
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div class="acordeon-cuerpo" id="ac-cuerpo-${i}" style="max-height:${i===0?'300px':'0'}">
+        <div class="acordeon-cuerpo-inner">${it.cuerpo}</div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('acordeon').addEventListener('click', e => {
+    const btn = e.target.closest('.acordeon-btn');
+    if (!btn) return;
+    const item = btn.closest('.acordeon-item');
+    const cuerpo = item.querySelector('.acordeon-cuerpo');
+    const abierto = item.classList.contains('abierto');
+    // cerrar todos
+    document.querySelectorAll('.acordeon-item').forEach(it => {
+      it.classList.remove('abierto');
+      it.querySelector('.acordeon-cuerpo').style.maxHeight = '0';
+      it.querySelector('.acordeon-btn').setAttribute('aria-expanded', 'false');
+    });
+    if (!abierto) {
+      item.classList.add('abierto');
+      cuerpo.style.maxHeight = '300px';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Relacionados
+  const relacionados = PRODUCTOS.filter(p => p.id !== prod.id && p.categoria === prod.categoria).slice(0, 4);
+  if (relacionados.length) {
+    document.getElementById('gridRelacionados').innerHTML = relacionados.map(p => `
+      <article class="card-producto" role="listitem">
+        <a href="producto.html?id=${p.id}">
+          <div class="card-img">
+            ${p.img
+              ? `<img src="${p.img}" alt="${p.nombre}" loading="lazy">`
+              : `<div class="bolsa-css" data-color="${p.bolsa||'verde'}"><span class="bolsa-nativo">NATIVO</span><span class="bolsa-nombre">${p.nombre}</span></div>`
+            }
+            <span class="card-cat">${CATEGORIAS[p.categoria].label}</span>
+          </div>
+        </a>
+        <div class="card-cuerpo">
+          <div class="card-nombre">${p.nombre}</div>
+          <div class="card-precio">${formatPrecio(precioDesde(p))}</div>
+        </div>
+        <div class="card-acciones">
+          <a href="producto.html?id=${p.id}" class="btn btn-outline btn-sm">Ver más</a>
+          <button class="btn btn-primary btn-sm" onclick="agregarAlCarrito('${p.id}','${p.presentaciones[0].size}','${p.presentaciones[0].tueste}',1)">Agregar</button>
+        </div>
+      </article>`).join('');
+  } else {
+    document.getElementById('secRelacionados').style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>

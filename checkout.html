@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Café Nativo</title>
+  <meta name="description" content="Completa tu pedido en Café Nativo.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="topbar">Pedidos por WhatsApp &nbsp;·&nbsp; Bolsas de 250 g y 500 g</div>
+
+<!-- Banner demo fijo -->
+<div class="banner-demo" role="alert">
+  <strong>Modo demostración · Proyecto académico · No se realizan cobros reales</strong>
+  &nbsp;|&nbsp; Tarjetas de prueba: <strong>4242 4242 4242 4242</strong> (aprobada) &nbsp;·&nbsp; <strong>4000 0000 0000 0002</strong> (rechazada)
+</div>
+
+<header class="site-header" style="top:calc(var(--header-h) + 2.6rem);">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo">
+      <span>NATIVO</span>
+      <span class="logo-sub">EL ORIGEN DE TU CAFÉ</span>
+    </a>
+    <div class="header-actions" style="margin-left:auto;">
+      <a href="carrito.html" class="btn btn-ghost btn-sm">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Volver al carrito
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Resumen móvil plegable -->
+<div id="resumenMovilToggle" class="resumen-movil-toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="resumenMovilCuerpo">
+  <span>Resumen del pedido</span>
+  <span id="resumenMovilTotal"></span>
+</div>
+<div class="resumen-movil-cuerpo" id="resumenMovilCuerpo">
+  <div style="padding:1rem 1.5rem;" id="resumenMovilItems"></div>
+  <div style="padding:.5rem 1.5rem 1rem;" id="resumenMovilTotales"></div>
+</div>
+
+<main class="checkout-page" style="padding-top:1rem;">
+  <div class="container">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <a href="index.html">Inicio</a>
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M9 5l7 7-7 7"/></svg>
+      <a href="carrito.html">Carrito</a>
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M9 5l7 7-7 7"/></svg>
+      <span>Checkout</span>
+    </nav>
+
+    <!-- Indicador de pasos -->
+    <div class="pasos-indicator" role="list" aria-label="Pasos del checkout">
+      <div class="paso-ind activo" id="indPaso1" role="listitem">
+        <div class="paso-ind-num">1</div>
+        <div class="paso-ind-label">Datos</div>
+      </div>
+      <div class="paso-ind" id="indPaso2" role="listitem">
+        <div class="paso-ind-num">2</div>
+        <div class="paso-ind-label">Pago</div>
+      </div>
+      <div class="paso-ind" id="indPaso3" role="listitem">
+        <div class="paso-ind-num">3</div>
+        <div class="paso-ind-label">Revisión</div>
+      </div>
+    </div>
+
+    <div class="checkout-layout">
+      <!-- Formulario -->
+      <div>
+
+        <!-- ALERTA ERROR PAGO -->
+        <div class="alerta-pago" id="alertaPago" role="alert">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" flex-shrink="0" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+          </svg>
+          <div>
+            <strong id="alertaTitulo">Pago rechazado</strong>
+            <div id="alertaMensaje">Fondos insuficientes. Verifica tu saldo o intenta con otro método.</div>
+          </div>
+        </div>
+
+        <!-- ═══ PASO 1: Datos y envío ═══ -->
+        <div class="paso-panel activo" id="paso1">
+          <h2 style="font-size:1.2rem;margin-bottom:1.5rem;color:var(--verde);">Datos y envío</h2>
+          <form class="checkout-form" id="formDatos" novalidate>
+            <div class="form-grid" style="grid-template-columns:1fr;gap:1rem;">
+              <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                <div class="campo">
+                  <label for="ch-nombre">Nombre completo <span style="color:var(--error)">*</span></label>
+                  <input type="text" id="ch-nombre" name="nombre" autocomplete="name" placeholder="Juan García" required>
+                  <span class="campo-error">Ingresa tu nombre completo (mín. 2 palabras)</span>
+                </div>
+                <div class="campo">
+                  <label for="ch-email">Correo electrónico <span style="color:var(--error)">*</span></label>
+                  <input type="email" id="ch-email" name="email" autocomplete="email" placeholder="juan@correo.com" required>
+                  <span class="campo-error">Ingresa un correo válido</span>
+                </div>
+                <div class="campo">
+                  <label for="ch-cel">Celular <span style="color:var(--error)">*</span></label>
+                  <input type="tel" id="ch-cel" name="celular" autocomplete="tel" placeholder="3001234567" maxlength="10" required>
+                  <span class="campo-error">Debe tener exactamente 10 dígitos</span>
+                </div>
+                <div class="campo">
+                  <label for="ch-cedula">Cédula <span style="color:var(--error)">*</span></label>
+                  <input type="text" id="ch-cedula" name="cedula" inputmode="numeric" placeholder="1234567890" required>
+                  <span class="campo-error">Ingresa tu número de cédula</span>
+                </div>
+                <div class="campo">
+                  <label for="ch-dpto">Departamento <span style="color:var(--error)">*</span></label>
+                  <select id="ch-dpto" name="departamento" autocomplete="address-level1" required>
+                    <option value="">Selecciona...</option>
+                    <option>Amazonas</option><option>Antioquia</option><option>Arauca</option>
+                    <option>Atlántico</option><option>Bolívar</option><option>Boyacá</option>
+                    <option>Caldas</option><option>Caquetá</option><option>Casanare</option>
+                    <option>Cauca</option><option>Cesar</option><option>Chocó</option>
+                    <option>Córdoba</option><option>Cundinamarca</option><option>Bogotá D.C.</option>
+                    <option>Guainía</option><option>Guaviare</option><option>Huila</option>
+                    <option>La Guajira</option><option>Magdalena</option><option>Meta</option>
+                    <option>Nariño</option><option>Norte de Santander</option><option>Putumayo</option>
+                    <option>Quindío</option><option>Risaralda</option><option>San Andrés y Providencia</option>
+                    <option>Santander</option><option>Sucre</option><option>Tolima</option>
+                    <option>Valle del Cauca</option><option>Vaupés</option><option>Vichada</option>
+                  </select>
+                  <span class="campo-error">Selecciona tu departamento</span>
+                </div>
+                <div class="campo">
+                  <label for="ch-ciudad">Ciudad <span style="color:var(--error)">*</span></label>
+                  <input type="text" id="ch-ciudad" name="ciudad" autocomplete="address-level2" placeholder="Bogotá" required>
+                  <span class="campo-error">Ingresa tu ciudad</span>
+                </div>
+              </div>
+              <div class="campo">
+                <label for="ch-dir">Dirección <span style="color:var(--error)">*</span></label>
+                <input type="text" id="ch-dir" name="direccion" autocomplete="street-address" placeholder="Cra 10 # 20-30" required>
+                <span class="campo-error">Ingresa tu dirección</span>
+              </div>
+              <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                <div class="campo">
+                  <label for="ch-barrio">Barrio <span style="color:var(--error)">*</span></label>
+                  <input type="text" id="ch-barrio" name="barrio" autocomplete="address-level3" placeholder="El Centro" required>
+                  <span class="campo-error">Ingresa tu barrio</span>
+                </div>
+                <div class="campo">
+                  <label for="ch-notas">Notas (opcional)</label>
+                  <input type="text" id="ch-notas" name="notas" placeholder="Apto 301, dejar en portería...">
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:1.5rem;display:flex;justify-content:flex-end;">
+              <button type="submit" class="btn btn-primary btn-lg" id="btnSiguiente1">
+                Continuar con el pago
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" d="M9 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ═══ PASO 2: Método de pago ═══ -->
+        <div class="paso-panel" id="paso2">
+          <h2 style="font-size:1.2rem;margin-bottom:1.5rem;color:var(--verde);">Método de pago</h2>
+          <div class="pago-tabs" role="tablist" aria-label="Métodos de pago">
+            <button class="pago-tab-btn activo" role="tab" aria-selected="true"  aria-controls="tab-tarjeta" id="tabTarjeta">Tarjeta</button>
+            <button class="pago-tab-btn"         role="tab" aria-selected="false" aria-controls="tab-pse"     id="tabPSE">PSE</button>
+            <button class="pago-tab-btn"         role="tab" aria-selected="false" aria-controls="tab-nequi"   id="tabNequi">Nequi</button>
+            <button class="pago-tab-btn"         role="tab" aria-selected="false" aria-controls="tab-contra"  id="tabContra">Contraentrega</button>
+          </div>
+
+          <!-- Tarjeta -->
+          <div class="pago-panel activo" id="tab-tarjeta" role="tabpanel" aria-labelledby="tabTarjeta">
+            <form class="checkout-form" id="formTarjeta" novalidate>
+              <div class="form-grid" style="display:grid;grid-template-columns:1fr;gap:1rem;">
+                <div class="campo">
+                  <label for="cc-num">Número de tarjeta <span style="color:var(--error)">*</span></label>
+                  <div class="campo-tarjeta-wrap">
+                    <input type="text" id="cc-num" name="cc-number" autocomplete="cc-number" inputmode="numeric"
+                      placeholder="4242 4242 4242 4242" maxlength="19" required>
+                    <div class="tarjeta-logo" id="tarjetaLogo" aria-live="polite"></div>
+                  </div>
+                  <span class="campo-error">Número de tarjeta inválido</span>
+                </div>
+                <div class="campo">
+                  <label for="cc-name">Nombre en la tarjeta <span style="color:var(--error)">*</span></label>
+                  <input type="text" id="cc-name" name="cc-name" autocomplete="cc-name" placeholder="JUAN GARCIA" required>
+                  <span class="campo-error">Ingresa el nombre tal como aparece en la tarjeta</span>
+                </div>
+                <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
+                  <div class="campo" style="grid-column:1/3;">
+                    <label for="cc-exp">Vencimiento MM/AA <span style="color:var(--error)">*</span></label>
+                    <input type="text" id="cc-exp" name="cc-exp" autocomplete="cc-exp" placeholder="12/27" maxlength="5" required>
+                    <span class="campo-error">Fecha inválida o vencida</span>
+                  </div>
+                  <div class="campo">
+                    <label for="cc-cvc">CVV <span style="color:var(--error)">*</span></label>
+                    <input type="text" id="cc-cvc" name="cc-csc" autocomplete="cc-csc" inputmode="numeric" placeholder="123" maxlength="4" required>
+                    <span class="campo-error">CVV inválido</span>
+                  </div>
+                </div>
+                <div class="campo">
+                  <label for="cc-cuotas">Cuotas</label>
+                  <select id="cc-cuotas" name="cuotas" autocomplete="off">
+                    <option value="1">1 cuota (sin interés)</option>
+                    <option value="3">3 cuotas</option>
+                    <option value="6">6 cuotas</option>
+                    <option value="12">12 cuotas</option>
+                    <option value="24">24 cuotas</option>
+                    <option value="36">36 cuotas</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- PSE -->
+          <div class="pago-panel" id="tab-pse" role="tabpanel" aria-labelledby="tabPSE">
+            <form class="checkout-form" id="formPSE" novalidate>
+              <div class="form-grid" style="display:grid;grid-template-columns:1fr;gap:1rem;">
+                <div class="campo">
+                  <label for="pse-banco">Banco <span style="color:var(--error)">*</span></label>
+                  <select id="pse-banco" name="banco" required>
+                    <option value="">Selecciona tu banco...</option>
+                    <option>Bancolombia</option><option>Banco de Bogotá</option><option>Davivienda</option>
+                    <option>BBVA Colombia</option><option>Banco de Occidente</option><option>Bancoomeva</option>
+                    <option>Banco Caja Social</option><option>Banco Agrario</option><option>Banco AV Villas</option>
+                    <option>Banco Popular</option><option>Banco Falabella</option><option>Itaú</option>
+                    <option>Banco W</option><option>Citibank</option><option>GNB Sudameris</option>
+                    <option>Bancoldex</option><option>Finandina</option><option>Lulo Bank</option>
+                    <option>Nequi</option><option>Daviplata</option><option>RappiPay</option>
+                    <option>Nu Colombia (Nubank)</option><option>Iris</option><option>Coopcentral</option>
+                    <option>JFK Cooperativa Financiera</option>
+                  </select>
+                  <span class="campo-error">Selecciona tu banco</span>
+                </div>
+                <div class="campo">
+                  <label for="pse-tipo-persona">Tipo de persona <span style="color:var(--error)">*</span></label>
+                  <select id="pse-tipo-persona" name="tipoPersona" required>
+                    <option value="">Selecciona...</option>
+                    <option value="natural">Natural</option>
+                    <option value="juridica">Jurídica</option>
+                  </select>
+                  <span class="campo-error">Selecciona el tipo de persona</span>
+                </div>
+                <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                  <div class="campo">
+                    <label for="pse-tipo-doc">Tipo de documento <span style="color:var(--error)">*</span></label>
+                    <select id="pse-tipo-doc" name="tipoDoc" required>
+                      <option value="">—</option>
+                      <option value="CC">Cédula de ciudadanía</option>
+                      <option value="CE">Cédula de extranjería</option>
+                      <option value="NIT">NIT</option>
+                      <option value="PP">Pasaporte</option>
+                    </select>
+                    <span class="campo-error">Selecciona el tipo de documento</span>
+                  </div>
+                  <div class="campo">
+                    <label for="pse-num-doc">Número de documento <span style="color:var(--error)">*</span></label>
+                    <input type="text" id="pse-num-doc" name="numDoc" inputmode="numeric" placeholder="1234567890" required>
+                    <span class="campo-error">Ingresa tu número de documento</span>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Nequi -->
+          <div class="pago-panel" id="tab-nequi" role="tabpanel" aria-labelledby="tabNequi">
+            <form class="checkout-form" id="formNequi" novalidate>
+              <div class="campo" style="max-width:280px;">
+                <label for="nequi-cel">Número de celular Nequi <span style="color:var(--error)">*</span></label>
+                <input type="tel" id="nequi-cel" name="nequiCel" inputmode="numeric" placeholder="3001234567" maxlength="10" required>
+                <span class="campo-error">Debe tener exactamente 10 dígitos</span>
+                <span class="campo-hint">Te redirigiremos al simulador de Nequi para aprobar el pago.</span>
+              </div>
+            </form>
+          </div>
+
+          <!-- Contraentrega -->
+          <div class="pago-panel" id="tab-contra" role="tabpanel" aria-labelledby="tabContra">
+            <div style="background:var(--crema-light);border-radius:var(--radio-sm);padding:1.25rem;border:1px solid var(--borde);">
+              <h4 style="margin-bottom:.5rem;">Pago contraentrega</h4>
+              <p style="font-size:.88rem;">Pagas al momento de recibir tu pedido. El mensajero llevará el comprobante. Solo disponible en ciudades con cobertura.</p>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap;">
+            <button class="btn btn-outline" id="btnAnterior2">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Volver
+            </button>
+            <button class="btn btn-primary btn-lg" id="btnSiguiente2" style="margin-left:auto;">
+              Revisar pedido
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ═══ PASO 3: Revisión ═══ -->
+        <div class="paso-panel" id="paso3">
+          <h2 style="font-size:1.2rem;margin-bottom:1.5rem;color:var(--verde);">Revisa tu pedido</h2>
+
+          <div class="revision-seccion">
+            <h4>DATOS DE ENVÍO</h4>
+            <div id="revDatos"></div>
+          </div>
+          <div class="revision-seccion">
+            <h4>MÉTODO DE PAGO</h4>
+            <div id="revPago"></div>
+          </div>
+          <div class="revision-seccion">
+            <h4>RESUMEN DEL PEDIDO</h4>
+            <div id="revProductos"></div>
+            <div style="margin-top:.75rem;" id="revTotales"></div>
+          </div>
+
+          <div class="terminos-wrap">
+            <input type="checkbox" id="chkTerminos">
+            <label for="chkTerminos" style="color:var(--texto-suave);font-size:.85rem;">
+              Acepto los <a href="#" style="color:var(--verde);text-decoration:underline;">términos y condiciones</a> y la <a href="#" style="color:var(--verde);text-decoration:underline;">política de privacidad</a>.
+            </label>
+          </div>
+
+          <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;">
+            <button class="btn btn-outline" id="btnAnterior3">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Volver
+            </button>
+            <button class="btn btn-primary btn-lg" id="btnPagar" disabled style="margin-left:auto;">
+              Pagar <span id="btnPagarTotal"></span>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /formulario -->
+
+      <!-- Resumen sticky (escritorio) -->
+      <aside class="checkout-resumen" id="checkoutResumen">
+        <h3>Tu pedido</h3>
+        <div class="checkout-resumen-items" id="checkoutResumenItems"></div>
+        <div id="checkoutResumenTotales"></div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- Pantalla procesando -->
+<div class="pantalla-procesando" id="pantallaProcessando" aria-live="assertive" aria-label="Procesando pago">
+  <div class="spinner"></div>
+  <p>Procesando pago…</p>
+</div>
+
+<!-- Pantalla banco PSE / Nequi -->
+<div class="pantalla-banco" id="pantallaBanco">
+  <div class="banco-modal">
+    <h3 id="bancoTitulo">Simulador de banco</h3>
+    <p id="bancoCuerpo">Selecciona la acción para simular la respuesta del banco.</p>
+    <div class="banco-btns">
+      <button class="btn btn-verde" id="btnAprobarBanco">Aprobar pago</button>
+      <button class="btn btn-outline" id="btnRechazarBanco" style="border-color:var(--error);color:var(--error);">Rechazar pago</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/productos.js"></script>
+<script src="js/app.js"></script>
+<script>
+/* ════ Checkout ════ */
+
+let pasoActual = 1;
+let metodoPago = 'tarjeta';
+let datosDatos = {};
+let datosPago  = {};
+
+/* ── Indicadores ── */
+function irAPaso(n) {
+  for (let i = 1; i <= 3; i++) {
+    document.getElementById(`paso${i}`).classList.toggle('activo', i === n);
+    const ind = document.getElementById(`indPaso${i}`);
+    ind.classList.toggle('activo', i === n);
+    ind.classList.toggle('completado', i < n);
+  }
+  pasoActual = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (n === 3) llenarRevision();
+}
+
+/* ── Render resumen sidebar ── */
+function renderResumenCheckout() {
+  const items  = document.getElementById('checkoutResumenItems');
+  const totales = document.getElementById('checkoutResumenTotales');
+  if (!items || !totales) return;
+
+  items.innerHTML = carrito.map(it => `
+    <div class="resumen-prod">
+      <div class="resumen-prod-img">
+        ${it.img ? `<img src="${it.img}" alt="${it.nombre}" loading="lazy">` : `<div class="bolsa-css" data-color="${it.bolsa||'verde'}" style="height:100%;"><span style="font-size:.5rem;font-family:var(--fuente-logo);color:var(--bolsa-acento,#C98A4B)">N</span></div>`}
+      </div>
+      <div>
+        <div class="resumen-prod-nombre">${it.nombre}</div>
+        <div class="resumen-prod-det">${it.size} · ×${it.cantidad}</div>
+      </div>
+      <div class="resumen-prod-precio">${formatPrecio(it.precio * it.cantidad)}</div>
+    </div>`).join('');
+
+  const { subtotal, descuento, envio, total } = calcularTotales();
+  const envioTxt = envio === 0 ? '<span style="color:var(--exito)">Gratis</span>' : formatPrecio(envio);
+  totales.innerHTML = `
+    <div class="resumen-fila"><span>Subtotal</span><span>${formatPrecio(subtotal)}</span></div>
+    ${descuento ? `<div class="resumen-fila"><span>Descuento</span><span>−${formatPrecio(descuento)}</span></div>` : ''}
+    <div class="resumen-fila"><span>Envío</span><span>${envioTxt}</span></div>
+    <div class="resumen-fila total"><span>Total</span><span>${formatPrecio(total)}</span></div>`;
+
+  document.getElementById('btnPagarTotal').textContent = formatPrecio(total);
+  document.getElementById('resumenMovilTotal').textContent = formatPrecio(total);
+}
+
+/* ── Resumen móvil ── */
+function renderResumenMovil() {
+  const { subtotal, descuento, envio, total } = calcularTotales();
+  const envioTxt = envio === 0 ? '<span style="color:var(--exito)">Gratis</span>' : formatPrecio(envio);
+  document.getElementById('resumenMovilItems').innerHTML = carrito.map(it =>
+    `<div style="display:flex;justify-content:space-between;font-size:.82rem;padding:.25rem 0;">
+      <span>${it.nombre} ×${it.cantidad} (${it.size})</span>
+      <span>${formatPrecio(it.precio*it.cantidad)}</span>
+    </div>`).join('');
+  document.getElementById('resumenMovilTotales').innerHTML = `
+    <div class="resumen-fila"><span>Subtotal</span><span>${formatPrecio(subtotal)}</span></div>
+    <div class="resumen-fila"><span>Envío</span><span>${envioTxt}</span></div>
+    <div class="resumen-fila total"><span>Total</span><span>${formatPrecio(total)}</span></div>`;
+}
+
+/* ── Validación campos ── */
+function validarCampo(el) {
+  const campo = el.closest('.campo');
+  if (!campo) return true;
+  let ok = true;
+
+  if (el.required && !el.value.trim()) ok = false;
+  if (el.type === 'email' && el.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)) ok = false;
+  if (el.name === 'nombre' && el.value.trim().split(/\s+/).length < 2) ok = false;
+  if (el.name === 'celular' && el.value && !/^\d{10}$/.test(el.value.replace(/\s/g,''))) ok = false;
+  if (el.name === 'nequiCel' && el.value && !/^\d{10}$/.test(el.value.replace(/\s/g,''))) ok = false;
+  if (el.name === 'cedula' && el.value && !/^\d+$/.test(el.value.trim())) ok = false;
+
+  campo.classList.toggle('invalido', !ok);
+  campo.classList.toggle('valido', ok && el.value.trim() !== '');
+  return ok;
+}
+
+function validarForm(form) {
+  let ok = true;
+  form.querySelectorAll('input, select').forEach(el => {
+    if (!validarCampo(el)) ok = false;
+  });
+  return ok;
+}
+
+/* ── Luhn ── */
+function luhn(num) {
+  const digits = num.replace(/\D/g,'').split('').reverse().map(Number);
+  let sum = 0;
+  digits.forEach((d, i) => {
+    if (i % 2 === 1) { d *= 2; if (d > 9) d -= 9; }
+    sum += d;
+  });
+  return sum % 10 === 0;
+}
+
+/* ── Detectar marca tarjeta ── */
+function detectarMarca(num) {
+  const n = num.replace(/\D/g,'');
+  if (/^4/.test(n))               return 'visa';
+  if (/^5[1-5]|^2[2-7]/.test(n)) return 'mastercard';
+  if (/^3[47]/.test(n))          return 'amex';
+  return null;
+}
+
+const SVG_VISA = `<svg viewBox="0 0 48 16" height="20" aria-label="Visa" role="img"><text x="0" y="13" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#1A1F71">VISA</text></svg>`;
+const SVG_MC   = `<svg viewBox="0 0 36 24" height="24" aria-label="Mastercard" role="img"><circle cx="13" cy="12" r="10" fill="#EB001B"/><circle cx="23" cy="12" r="10" fill="#F79E1B" opacity=".8"/></svg>`;
+const SVG_AMEX = `<svg viewBox="0 0 48 20" height="20" aria-label="American Express" role="img"><rect width="48" height="20" rx="4" fill="#2E77BC"/><text x="4" y="14" font-family="Arial,sans-serif" font-weight="bold" font-size="10" fill="white">AMEX</text></svg>`;
+
+/* ── Validar tarjeta ── */
+function validarTarjeta() {
+  const num  = document.getElementById('cc-num').value.replace(/\D/g,'');
+  const name = document.getElementById('cc-name').value.trim();
+  const exp  = document.getElementById('cc-exp').value.trim();
+  const cvc  = document.getElementById('cc-cvc').value.trim();
+  let ok = true;
+
+  // Número + Luhn
+  const numCampo = document.getElementById('cc-num').closest('.campo');
+  if (!luhn(num) || num.length < 13) { numCampo.classList.add('invalido'); numCampo.classList.remove('valido'); ok = false; }
+  else { numCampo.classList.remove('invalido'); numCampo.classList.add('valido'); }
+
+  // Nombre
+  const nameCampo = document.getElementById('cc-name').closest('.campo');
+  if (!name) { nameCampo.classList.add('invalido'); nameCampo.classList.remove('valido'); ok = false; }
+  else { nameCampo.classList.remove('invalido'); nameCampo.classList.add('valido'); }
+
+  // Expiración
+  const expCampo = document.getElementById('cc-exp').closest('.campo');
+  const expMatch = exp.match(/^(\d{2})\/(\d{2})$/);
+  let expOk = false;
+  if (expMatch) {
+    const mes = parseInt(expMatch[1], 10);
+    const anio = 2000 + parseInt(expMatch[2], 10);
+    const hoy = new Date();
+    if (mes >= 1 && mes <= 12 && (anio > hoy.getFullYear() || (anio === hoy.getFullYear() && mes >= hoy.getMonth() + 1))) expOk = true;
+  }
+  if (!expOk) { expCampo.classList.add('invalido'); expCampo.classList.remove('valido'); ok = false; }
+  else { expCampo.classList.remove('invalido'); expCampo.classList.add('valido'); }
+
+  // CVV
+  const marca = detectarMarca(num);
+  const cvcLen = marca === 'amex' ? 4 : 3;
+  const cvcCampo = document.getElementById('cc-cvc').closest('.campo');
+  if (!/^\d+$/.test(cvc) || cvc.length !== cvcLen) { cvcCampo.classList.add('invalido'); cvcCampo.classList.remove('valido'); ok = false; }
+  else { cvcCampo.classList.remove('invalido'); cvcCampo.classList.add('valido'); }
+
+  return ok;
+}
+
+/* ── Llenar revisión (paso 3) ── */
+function llenarRevision() {
+  // Datos
+  document.getElementById('revDatos').innerHTML = `
+    <div class="revision-fila"><span>Nombre</span><span>${datosDatos.nombre||'—'}</span></div>
+    <div class="revision-fila"><span>Correo</span><span>${datosDatos.email||'—'}</span></div>
+    <div class="revision-fila"><span>Celular</span><span>${datosDatos.celular||'—'}</span></div>
+    <div class="revision-fila"><span>Dirección</span><span>${datosDatos.direccion||''}, ${datosDatos.barrio||''}, ${datosDatos.ciudad||''}, ${datosDatos.departamento||''}</span></div>`;
+
+  // Pago
+  let revPagoHtml = '';
+  if (metodoPago === 'tarjeta') {
+    const num   = document.getElementById('cc-num').value.replace(/\D/g,'');
+    const marca = detectarMarca(num) || 'Tarjeta';
+    const ult4  = num.slice(-4);
+    revPagoHtml = `<div class="revision-fila"><span>Método</span><span>${marca.charAt(0).toUpperCase()+marca.slice(1)} ****${ult4}</span></div>
+      <div class="revision-fila"><span>Cuotas</span><span>${document.getElementById('cc-cuotas').value}</span></div>`;
+  } else if (metodoPago === 'pse') {
+    revPagoHtml = `<div class="revision-fila"><span>Método</span><span>PSE — ${document.getElementById('pse-banco').value}</span></div>`;
+  } else if (metodoPago === 'nequi') {
+    const cel = document.getElementById('nequi-cel').value;
+    revPagoHtml = `<div class="revision-fila"><span>Método</span><span>Nequi — ${cel.slice(0,3)}****${cel.slice(-3)}</span></div>`;
+  } else {
+    revPagoHtml = `<div class="revision-fila"><span>Método</span><span>Contraentrega</span></div>`;
+  }
+  document.getElementById('revPago').innerHTML = revPagoHtml;
+
+  // Productos
+  document.getElementById('revProductos').innerHTML = carrito.map(it =>
+    `<div class="revision-fila"><span>${it.nombre} ×${it.cantidad} (${it.size})</span><span>${formatPrecio(it.precio*it.cantidad)}</span></div>`
+  ).join('');
+
+  const { subtotal, descuento, envio, total } = calcularTotales();
+  document.getElementById('revTotales').innerHTML = `
+    ${descuento ? `<div class="revision-fila"><span>Descuento</span><span>−${formatPrecio(descuento)}</span></div>` : ''}
+    <div class="revision-fila"><span>Envío</span><span>${envio === 0 ? 'Gratis' : formatPrecio(envio)}</span></div>
+    <div class="revision-fila" style="font-weight:700;color:var(--verde);"><span>Total</span><span>${formatPrecio(total)}</span></div>`;
+}
+
+/* ── Simulación del pago ── */
+function simularPago() {
+  ocultarAlertaPago();
+  document.getElementById('pantallaProcessando').classList.add('visible');
+
+  const delay = 2000 + Math.random() * 1000;
+
+  setTimeout(() => {
+    document.getElementById('pantallaProcessando').classList.remove('visible');
+
+    if (metodoPago === 'tarjeta') {
+      const num = document.getElementById('cc-num').value.replace(/\D/g,'');
+      if (num === '4000000000000002') {
+        mostrarErrorPago('Pago rechazado', 'Fondos insuficientes. Verifica tu saldo o intenta con otro método de pago.');
+      } else {
+        // Cualquier Luhn válido → aprobado
+        finalizarPedidoAprobado();
+      }
+    } else if (metodoPago === 'pse' || metodoPago === 'nequi') {
+      // Pantalla banco
+      const banco = metodoPago === 'pse' ? document.getElementById('pse-banco').value : 'Nequi';
+      document.getElementById('bancoTitulo').textContent = `Simulador — ${banco}`;
+      document.getElementById('bancoCuerpo').textContent =
+        `Estás a punto de aprobar el pago a Café Nativo. Selecciona una acción.`;
+      document.getElementById('pantallaBanco').classList.add('visible');
+    } else {
+      // Contraentrega → aprobado siempre
+      finalizarPedidoAprobado();
+    }
+  }, delay);
+}
+
+function finalizarPedidoAprobado() {
+  document.getElementById('pantallaBanco').classList.remove('visible');
+  const { total } = calcularTotales();
+  const numPedido = generarNumeroPedido();
+
+  // Guardar datos del pago (sin número completo ni CVV)
+  let infoMetodo = '';
+  if (metodoPago === 'tarjeta') {
+    const num   = document.getElementById('cc-num').value.replace(/\D/g,'');
+    const marca = detectarMarca(num) || 'Tarjeta';
+    infoMetodo  = `${marca.charAt(0).toUpperCase()+marca.slice(1)} ****${num.slice(-4)}`;
+  } else if (metodoPago === 'pse') {
+    infoMetodo = `PSE — ${document.getElementById('pse-banco').value}`;
+  } else if (metodoPago === 'nequi') {
+    const cel = document.getElementById('nequi-cel').value;
+    infoMetodo = `Nequi — ${cel.slice(0,3)}****${cel.slice(-3)}`;
+  } else {
+    infoMetodo = 'Contraentrega';
+  }
+
+  const pedido = {
+    numero: numPedido,
+    fecha: new Date().toISOString(),
+    estado: 'Aprobado',
+    total,
+    items: carrito.map(i => ({ nombre: i.nombre, size: i.size, tueste: i.tueste, cantidad: i.cantidad, precio: i.precio })),
+    envio: datosDatos,
+    pago: infoMetodo,
+  };
+
+  guardarPedido(pedido);
+  localStorage.setItem('nativo_ultimo_pedido', JSON.stringify(pedido));
+  vaciarCarrito();
+  window.location.href = 'confirmacion.html';
+}
+
+function mostrarErrorPago(titulo, mensaje) {
+  document.getElementById('alertaTitulo').textContent  = titulo;
+  document.getElementById('alertaMensaje').textContent = mensaje;
+  document.getElementById('alertaPago').classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function ocultarAlertaPago() {
+  document.getElementById('alertaPago').classList.remove('visible');
+}
+
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', () => {
+  // Si el carrito está vacío, redirigir
+  if (!carrito.length) { window.location.href = 'carrito.html'; return; }
+
+  renderResumenCheckout();
+  renderResumenMovil();
+
+  /* Resumen móvil toggle */
+  document.getElementById('resumenMovilToggle').addEventListener('click', () => {
+    const cuerpo  = document.getElementById('resumenMovilCuerpo');
+    const abierto = cuerpo.classList.toggle('abierto');
+    document.getElementById('resumenMovilToggle').setAttribute('aria-expanded', abierto);
+  });
+  document.getElementById('resumenMovilToggle').addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.target.click(); }
+  });
+
+  /* Tabs de pago */
+  document.querySelectorAll('.pago-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.pago-tab-btn').forEach(b => { b.classList.remove('activo'); b.setAttribute('aria-selected','false'); });
+      document.querySelectorAll('.pago-panel').forEach(p => p.classList.remove('activo'));
+      btn.classList.add('activo');
+      btn.setAttribute('aria-selected','true');
+      document.getElementById(btn.getAttribute('aria-controls')).classList.add('activo');
+      metodoPago = { tabTarjeta:'tarjeta', tabPSE:'pse', tabNequi:'nequi', tabContra:'contra' }[btn.id];
+    });
+  });
+
+  /* Formato número tarjeta */
+  document.getElementById('cc-num').addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g,'');
+    const marca = detectarMarca(v);
+    // AMEX: 4-6-5
+    if (marca === 'amex') {
+      v = v.slice(0,15);
+      v = [v.slice(0,4), v.slice(4,10), v.slice(10)].filter(Boolean).join(' ');
+    } else {
+      v = v.slice(0,16);
+      v = v.match(/.{1,4}/g)?.join(' ') || v;
+    }
+    e.target.value = v;
+
+    const logoEl = document.getElementById('tarjetaLogo');
+    if (marca === 'visa')       logoEl.innerHTML = SVG_VISA;
+    else if (marca === 'mastercard') logoEl.innerHTML = SVG_MC;
+    else if (marca === 'amex')  logoEl.innerHTML = SVG_AMEX;
+    else logoEl.innerHTML = '';
+  });
+
+  /* Formato expiración */
+  document.getElementById('cc-exp').addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g,'');
+    if (v.length > 2) v = v.slice(0,2) + '/' + v.slice(2,4);
+    e.target.value = v;
+  });
+
+  /* Validación en vivo */
+  document.querySelectorAll('.checkout-form input, .checkout-form select').forEach(el => {
+    el.addEventListener('blur', () => validarCampo(el));
+  });
+
+  /* Paso 1 → 2 */
+  document.getElementById('formDatos').addEventListener('submit', e => {
+    e.preventDefault();
+    if (!validarForm(e.target)) return;
+    // Guardar datos
+    ['nombre','email','celular','cedula','departamento','ciudad','direccion','barrio','notas'].forEach(n => {
+      datosDatos[n] = e.target.elements[n]?.value || '';
+    });
+    irAPaso(2);
+  });
+
+  /* Paso 2 → 3 */
+  document.getElementById('btnSiguiente2').addEventListener('click', () => {
+    let formOk = true;
+    if (metodoPago === 'tarjeta') formOk = validarTarjeta();
+    else if (metodoPago === 'pse') formOk = validarForm(document.getElementById('formPSE'));
+    else if (metodoPago === 'nequi') formOk = validarForm(document.getElementById('formNequi'));
+    if (!formOk) return;
+    irAPaso(3);
+  });
+
+  /* Volver */
+  document.getElementById('btnAnterior2').addEventListener('click', () => irAPaso(1));
+  document.getElementById('btnAnterior3').addEventListener('click', () => irAPaso(2));
+
+  /* Términos → habilitar botón pagar */
+  document.getElementById('chkTerminos').addEventListener('change', e => {
+    document.getElementById('btnPagar').disabled = !e.target.checked;
+  });
+
+  /* Pagar */
+  document.getElementById('btnPagar').addEventListener('click', simularPago);
+
+  /* Botones banco */
+  document.getElementById('btnAprobarBanco').addEventListener('click', finalizarPedidoAprobado);
+  document.getElementById('btnRechazarBanco').addEventListener('click', () => {
+    document.getElementById('pantallaBanco').classList.remove('visible');
+    mostrarErrorPago('Pago rechazado en el banco',
+      'La entidad bancaria rechazó la transacción. Intenta de nuevo o usa otro método de pago.');
+    irAPaso(2);
+  });
+});
+</script>
+</body>
+</html>
