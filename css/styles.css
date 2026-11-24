@@ -462,7 +462,10 @@ p  { color: var(--texto-suave); max-width: 65ch; line-height: 1.65; }
   color: var(--verde);
   line-height: 1.3;
   margin: 0;
+  text-decoration: none;
+  display: block;
 }
+.card-nombre:hover { color: var(--cafe); }
 .card-pie {
   display: flex;
   align-items: center;
@@ -1260,43 +1263,50 @@ p  { color: var(--texto-suave); max-width: 65ch; line-height: 1.65; }
 .pasos-indicator {
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
+  gap: 0;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--borde);
 }
 .paso-ind {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .35rem;
-  flex: 1;
+  align-items: baseline;
+  gap: .5rem;
+  padding: .75rem 1.25rem .75rem 0;
   position: relative;
+  cursor: default;
+  opacity: .4;
+  transition: opacity .2s;
 }
 .paso-ind::after {
   content: '';
   position: absolute;
-  top: 20px; left: calc(50% + 20px);
-  right: calc(-50% + 20px);
+  bottom: -1px; left: 0; right: 0;
   height: 2px;
-  background: var(--borde);
+  background: transparent;
+  transition: background .2s;
 }
-.paso-ind:last-child::after { display: none; }
-.paso-ind.completado::after { background: var(--verde); }
+.paso-ind.activo { opacity: 1; }
+.paso-ind.activo::after { background: var(--verde); }
+.paso-ind.completado { opacity: .7; }
+.paso-ind.completado::after { background: var(--dorado); }
 
 .paso-ind-num {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  border: 2px solid var(--borde);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .85rem; font-weight: 700;
-  color: var(--texto-suave);
-  background: var(--crema-light);
-  position: relative;
-  z-index: 1;
-  transition: all .2s;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--dorado);
+  font-family: var(--fuente-cuerpo);
 }
-.paso-ind.activo .paso-ind-num { border-color: var(--verde); background: var(--verde); color: var(--crema); }
-.paso-ind.completado .paso-ind-num { border-color: var(--verde); background: var(--verde); color: var(--crema); }
-.paso-ind-label { font-size: .72rem; font-weight: 500; color: var(--texto-suave); text-align: center; }
-.paso-ind.activo .paso-ind-label { color: var(--verde); font-weight: 600; }
+.paso-ind-label {
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--texto);
+  font-family: var(--fuente-cuerpo);
+}
+.paso-ind.activo .paso-ind-label { font-weight: 700; color: var(--verde); }
+.paso-ind-sep {
+  flex: 1;
+}
 
 /* Panel paso de checkout */
 .paso-panel { display: none; }

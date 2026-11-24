@@ -268,22 +268,24 @@ function renderGrid() {
 
     return `
       <article class="card-producto" role="listitem">
-        <a href="producto.html?id=${p.id}">
+        <a href="producto.html?id=${p.id}" class="card-media-link">
           <div class="card-img">
             ${imgHtml}
             <span class="card-cat">${CATEGORIAS[p.categoria].label}</span>
+            <div class="card-ver-overlay">Ver producto</div>
           </div>
         </a>
         <div class="card-cuerpo">
-          <div class="card-nombre">${p.nombre}</div>
-          <div class="card-desc">${p.descripcion}</div>
-          <div class="card-precio-desde">Desde</div>
-          <div class="card-precio">${formatPrecio(precio)}</div>
-        </div>
-        <div class="card-acciones">
-          <a href="producto.html?id=${p.id}" class="btn btn-outline btn-sm">Ver más</a>
-          <button class="btn btn-primary btn-sm"
-            onclick="agregarRapido('${p.id}')">Agregar</button>
+          <a href="producto.html?id=${p.id}" class="card-nombre">${p.nombre}</a>
+          <div class="card-pie">
+            <div>
+              <span class="card-precio-etq">Desde</span>
+              <span class="card-precio">${formatPrecio(precio)}</span>
+            </div>
+            <button class="card-btn-agregar" onclick="agregarRapido('${p.id}')" aria-label="Agregar ${p.nombre} al carrito">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M12 4v16m8-8H4"/></svg>
+            </button>
+          </div>
         </div>
       </article>`;
   }).join('');
