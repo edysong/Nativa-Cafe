@@ -1270,11 +1270,10 @@ p  { color: var(--texto-suave); max-width: 65ch; line-height: 1.65; }
 .paso-ind {
   display: flex;
   align-items: baseline;
-  gap: .5rem;
-  padding: .75rem 1.25rem .75rem 0;
+  gap: .45rem;
+  padding: .875rem 0;
   position: relative;
   cursor: default;
-  opacity: .4;
   transition: opacity .2s;
 }
 .paso-ind::after {
@@ -1285,49 +1284,61 @@ p  { color: var(--texto-suave); max-width: 65ch; line-height: 1.65; }
   background: transparent;
   transition: background .2s;
 }
-.paso-ind.activo { opacity: 1; }
 .paso-ind.activo::after { background: var(--verde); }
-.paso-ind.completado { opacity: .7; }
 .paso-ind.completado::after { background: var(--dorado); }
 
 .paso-ind-num {
-  font-size: .68rem;
-  font-weight: 600;
-  letter-spacing: .08em;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .1em;
   color: var(--dorado);
   font-family: var(--fuente-cuerpo);
 }
 .paso-ind-label {
-  font-size: .88rem;
+  font-size: .82rem;
   font-weight: 500;
-  color: var(--texto);
+  color: var(--texto-suave);
   font-family: var(--fuente-cuerpo);
 }
 .paso-ind.activo .paso-ind-label { font-weight: 700; color: var(--verde); }
-.paso-ind-sep {
-  flex: 1;
-}
+.paso-ind.completado .paso-ind-label { color: var(--cafe); }
+.paso-ind-sep { flex: 1; }
 
 /* Panel paso de checkout */
 .paso-panel { display: none; }
 .paso-panel.activo { display: block; }
 
 /* Inputs de checkout */
-.checkout-form .campo label { color: var(--texto-suave); font-size: .82rem; font-weight: 600; }
+.checkout-form .campo label {
+  color: var(--texto-suave);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
 .checkout-form .campo input,
 .checkout-form .campo select,
 .checkout-form .campo textarea {
-  border: 1.5px solid var(--borde);
-  border-radius: var(--radio-sm);
-  background: var(--crema-light);
+  border: none;
+  border-bottom: 1.5px solid var(--borde);
+  border-radius: 0;
+  background: transparent;
   color: var(--texto);
-  padding: .625rem .875rem;
-  font-size: .9rem;
-  min-height: 44px;
+  padding: .5rem 0;
+  font-size: .95rem;
+  min-height: 40px;
   width: 100%;
   transition: border-color .2s;
+  -webkit-appearance: none;
 }
-.checkout-form .campo textarea { min-height: 80px; resize: vertical; }
+.checkout-form .campo textarea {
+  min-height: 72px;
+  resize: vertical;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  padding: .5rem .75rem;
+  background: var(--crema-light);
+}
 .checkout-form .campo input:focus,
 .checkout-form .campo select:focus,
 .checkout-form .campo textarea:focus {
