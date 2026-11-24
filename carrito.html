@@ -1,26 +1,28 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrito — Café Nativo</title>
-  <meta name="description" content="Tu carrito de compras en Café Nativo.">
+  <title>Carrito â€” CafÃ© Nativo</title>
+  <meta name="description" content="Tu carrito de compras en CafÃ© Nativo.">
   <link rel="stylesheet" href="css/styles.css">
+  <script>tailwind.config={corePlugins:{preflight:false}}</script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
-<div class="topbar">Pedidos por WhatsApp &nbsp;·&nbsp; Bolsas de 250 g y 500 g</div>
+<div class="topbar">Pedidos por WhatsApp &nbsp;Â·&nbsp; Bolsas de 250 g y 500 g</div>
 
 <header class="site-header">
   <div class="container header-inner">
-    <nav class="header-nav" aria-label="Navegación principal">
+    <nav class="header-nav" aria-label="NavegaciÃ³n principal">
       <a href="tienda.html">Tienda</a>
       <a href="tienda.html?cat=origen">De origen</a>
       <a href="tienda.html?cat=saborizados">Saborizados</a>
     </nav>
     <a href="index.html" class="header-logo">
       <span>NATIVO</span>
-      <span class="logo-sub">EL ORIGEN DE TU CAFÉ</span>
+      <span class="logo-sub">EL ORIGEN DE TU CAFÃ‰</span>
     </a>
     <div class="header-actions">
       <button data-carrito-abrir aria-label="Abrir carrito">
@@ -35,7 +37,7 @@
 
 <main class="carrito-page">
   <div class="container">
-    <nav class="migas" aria-label="Ruta de navegación">
+    <nav class="migas" aria-label="Ruta de navegaciÃ³n">
       <a href="index.html">Inicio</a>
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M9 5l7 7-7 7"/></svg>
       <span>Carrito</span>
@@ -43,13 +45,13 @@
 
     <h1 style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1.5rem;">Tu carrito</h1>
 
-    <!-- Estado vacío -->
+    <!-- Estado vacÃ­o -->
     <div id="carritoVacio" style="display:none;text-align:center;padding:4rem 1rem;">
       <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.25" viewBox="0 0 24 24" style="margin:0 auto 1rem;opacity:.3;" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.853-7.148A60.114 60.114 0 006.412 5.635M4.5 20.25a.75.75 0 110 1.5.75.75 0 010-1.5zm15.75 0a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
       </svg>
-      <h3 style="font-size:1.1rem;margin-bottom:.5rem;">Tu carrito está vacío</h3>
-      <p style="margin-bottom:1.5rem;">Explora el catálogo y agrega tu café favorito.</p>
+      <h3 style="font-size:1.1rem;margin-bottom:.5rem;">Tu carrito estÃ¡ vacÃ­o</h3>
+      <p style="margin-bottom:1.5rem;">Explora el catÃ¡logo y agrega tu cafÃ© favorito.</p>
       <a href="tienda.html" class="btn btn-primary">Ir a la tienda</a>
     </div>
 
@@ -87,7 +89,7 @@
           <h3>Resumen del pedido</h3>
 
           <div class="carrito-cupon" style="margin-bottom:.75rem;">
-            <input type="text" id="inputCuponPage" placeholder="Código de descuento" aria-label="Código de cupón" autocomplete="off"
+            <input type="text" id="inputCuponPage" placeholder="CÃ³digo de descuento" aria-label="CÃ³digo de cupÃ³n" autocomplete="off"
               style="flex:1;padding:.5rem .875rem;border:1px solid var(--borde);border-radius:100px;font-size:.85rem;background:var(--crema);min-height:40px;">
             <button class="btn btn-outline btn-sm" id="btnAplicarCuponPage">Aplicar</button>
           </div>
@@ -110,8 +112,8 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-bottom" style="border-top:none;padding-top:0;">
-      <span>© 2024 Café Nativo</span>
-      <span>Proyecto académico — sin cobros reales</span>
+      <span>Â© 2024 CafÃ© Nativo</span>
+      <span>Proyecto acadÃ©mico â€” sin cobros reales</span>
     </div>
   </div>
 </footer>
@@ -130,7 +132,7 @@
   <div class="carrito-items" id="carritoItems"></div>
   <div class="carrito-pie" id="carritoPie" style="display:none">
     <div class="carrito-cupon">
-      <input type="text" id="inputCupon" placeholder="Código de descuento" aria-label="Código de cupón" autocomplete="off">
+      <input type="text" id="inputCupon" placeholder="CÃ³digo de descuento" aria-label="CÃ³digo de cupÃ³n" autocomplete="off">
       <button class="btn btn-outline btn-sm" id="btnAplicarCupon">Aplicar</button>
     </div>
     <div id="cuponMsg" class="cupon-msg" aria-live="polite"></div>
@@ -143,11 +145,11 @@
 <script src="js/app.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Cupón de la página
+    // CupÃ³n de la pÃ¡gina
     document.getElementById('btnAplicarCuponPage')?.addEventListener('click', () => {
       const val = document.getElementById('inputCuponPage')?.value || '';
       aplicarCupon(val);
-      // Mostrar mensaje en la página también
+      // Mostrar mensaje en la pÃ¡gina tambiÃ©n
       const msg = document.getElementById('cuponMsgPage');
       const srcMsg = document.getElementById('cuponMsg');
       if (msg && srcMsg) { msg.textContent = srcMsg.textContent; msg.className = srcMsg.className; }

@@ -171,15 +171,29 @@ p  { color: var(--texto-suave); max-width: 65ch; line-height: 1.65; }
   .header-nav { display: flex; }
 }
 .header-nav a {
-  font-size: .82rem;
+  font-size: .78rem;
   font-weight: 500;
-  letter-spacing: .04em;
+  letter-spacing: .06em;
   color: var(--texto-suave);
-  transition: color .2s;
   text-transform: uppercase;
+  position: relative;
+  padding-bottom: 3px;
+  transition: color .2s;
+}
+.header-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--verde);
+  transition: width .25s ease;
 }
 .header-nav a:hover { color: var(--verde); }
+.header-nav a:hover::after { width: 100%; }
 .header-nav a.activo { color: var(--verde); font-weight: 600; }
+.header-nav a.activo::after { width: 100%; }
 
 .header-logo {
   font-family: var(--fuente-logo);
@@ -213,13 +227,16 @@ p  { color: var(--texto-suave); max-width: 65ch; line-height: 1.65; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  color: var(--texto);
-  transition: background .2s;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radio-sm);
+  color: var(--texto-suave);
+  transition: color .2s, background .2s;
 }
-.header-actions button:hover { background: var(--borde); }
+.header-actions button:hover {
+  color: var(--verde);
+  background: rgba(31,58,43,.06);
+}
 .carrito-badge {
   position: absolute;
   top: 4px; right: 4px;
@@ -383,9 +400,32 @@ p  { color: var(--texto-suave); max-width: 65ch; line-height: 1.65; }
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: border-color .2s;
+  transition: border-color .25s, box-shadow .25s;
 }
-.card-producto:hover { border-color: var(--kraft); }
+.card-producto:hover {
+  border-color: rgba(31,58,43,.2);
+  box-shadow: 0 4px 20px rgba(31,58,43,.08);
+}
+
+.card-media-link { display: block; }
+
+/* Overlay "Ver producto" al hacer hover */
+.card-ver-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(31,58,43,.72);
+  color: var(--crema);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.card-producto:hover .card-ver-overlay { opacity: 1; }
 
 .card-img {
   position: relative;
@@ -410,19 +450,49 @@ p  { color: var(--texto-suave); max-width: 65ch; line-height: 1.65; }
 }
 
 .card-cuerpo {
-  padding: 1rem 1.25rem 1.25rem;
-  flex: 1; display: flex; flex-direction: column; gap: .5rem;
+  padding: .875rem 1rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
 }
-.card-nombre { font-size: 1.05rem; font-weight: 600; color: var(--verde); }
-.card-desc { font-size: .82rem; color: var(--texto-suave); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.card-precio-desde { font-size: .78rem; color: var(--texto-suave); }
-.card-precio { font-size: 1.1rem; font-weight: 700; color: var(--cafe); margin-top: auto; }
-
-.card-acciones {
-  display: flex; gap: .5rem; padding: 0 1.25rem 1.25rem;
-  flex-wrap: wrap;
+.card-nombre {
+  font-size: .93rem;
+  font-weight: 600;
+  color: var(--verde);
+  line-height: 1.3;
+  margin: 0;
 }
-.card-acciones .btn { flex: 1; }
+.card-pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: .5rem;
+}
+.card-precio-etq {
+  display: block;
+  font-size: .68rem;
+  color: var(--texto-suave);
+  letter-spacing: .03em;
+  line-height: 1;
+  margin-bottom: .15rem;
+}
+.card-precio { font-size: 1rem; font-weight: 700; color: var(--cafe); }
+.card-btn-agregar {
+  width: 34px; height: 34px;
+  border-radius: var(--radio-sm);
+  background: var(--verde);
+  color: var(--crema);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background .2s;
+}
+.card-btn-agregar:hover { background: var(--verde-hover); }
 
 /* ─── Bolsas CSS (productos sin foto) ─── */
 .bolsa-css {
